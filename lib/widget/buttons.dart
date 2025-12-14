@@ -24,7 +24,7 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_) => setState(() => scale = 0.93),
+      onTapDown: (_) => setState(() => scale = 0.92),
       onTapUp: (_) {
         setState(() => scale = 1.0);
         widget.buttonTapped?.call();
