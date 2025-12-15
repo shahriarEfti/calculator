@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
-
 import '../widget/buttons.dart';
 
-
-
-
-
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback onThemeChanged;
+
+  const HomeScreen({
+    super.key,
+    required this.onThemeChanged,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -29,7 +29,19 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple[100],
+      appBar: AppBar(
+
+        actions: [
+          IconButton(
+            icon: Icon(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+            onPressed: widget.onThemeChanged,
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
@@ -70,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 final text = buttons[index];
 
-                // Clear
                 if (text == 'C') {
                   return MyButton(
                     buttonText: text,
@@ -85,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                // Delete
                 if (text == 'DEL') {
                   return MyButton(
                     buttonText: text,
@@ -94,15 +104,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     buttonTapped: () {
                       if (userQuestion.isNotEmpty) {
                         setState(() {
-                          userQuestion = userQuestion.substring(
-                              0, userQuestion.length - 1);
+                          userQuestion =
+                              userQuestion.substring(0, userQuestion.length - 1);
                         });
                       }
                     },
                   );
                 }
 
-                // Equals
                 if (text == '=') {
                   return MyButton(
                     buttonText: text,
@@ -112,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                // Ans
                 if (text == 'Ans') {
                   return MyButton(
                     buttonText: text,
@@ -126,12 +134,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                // Normal buttons
                 return MyButton(
                   buttonText: text,
                   color: isOperator(text)
                       ? Colors.deepPurple
-                      : Colors.deepPurple[50]!,
+                      : Colors.deepPurple.shade50,
                   textColor: isOperator(text)
                       ? Colors.white
                       : Colors.deepPurple,
@@ -160,14 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
       String finalQuestion = userQuestion.replaceAll('x', '*');
       Parser p = Parser();
       Expression exp = p.parse(finalQuestion);
-
-      ContextModel cm = ContextModel();
-      double eval = exp.evaluate(EvaluationType.REAL, cm);
+      double eval = exp.evaluate(EvaluationType.REAL, ContextModel());
 
       setState(() {
         userAnswer = eval.toString();
       });
-    } catch (e) {
+    } catch (_) {
       setState(() {
         userAnswer = 'Error';
       });
