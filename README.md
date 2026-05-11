@@ -1,16 +1,16 @@
-# calculator
+Calculator App 📱🧮
 
-A new Flutter project.
+A simple and modern calculator mobile application built with the Flutter framework.
+This app supports both Light Mode ☀️ and Dark Mode 🌙 themes for a smooth and user-friendly experience.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+✨ Features
+Basic calculator operations
+Addition (+)
+Subtraction (-)
+Multiplication (×)
+Division (÷)
+Clean and responsive UI
+Dark and Light theme support
+Mobile-friendly design
+Fast and lightweight performance
+Built using Flutter framework
